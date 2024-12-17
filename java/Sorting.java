@@ -6,8 +6,64 @@ public class Sorting {
 
         mergeSort(arr, 0, arr.length-1);
 
-        System.out.println("Sorted Array: " + java.util.Arrays.toString(arr));
+        System.out.println("Merge Sorted Array: " + java.util.Arrays.toString(arr));
+
+        arr = new int[]{12, 11, 13, 7, 6, 5};
+        System.out.println("Original Array: " + java.util.Arrays.toString(arr));
+
+        quickSort(arr, 0, arr.length-1);
+        System.out.println("Quick Sorted Array: " + java.util.Arrays.toString(arr));
     }
+
+    /**
+     * Quick Sort
+     * - Pivot
+     * - Partition
+     */
+    public static void quickSort(int[] arr, int left, int right) {
+        if (left < right) {
+            int pivot = partition(arr, left, right);
+
+            quickSort(arr, left, pivot-1);      // left partition sort
+            quickSort(arr, pivot+1, right);      // right partition sort
+        }
+    }
+
+    /**
+     * 1. Place pivot at the right location in the array
+     * 2. return the right location
+     */
+    private static int partition(int[] arr, int left, int right) {
+        int pivot = arr[right];     // last element
+        System.out.println();
+        System.out.println(String.format("pivot = %d, left = %d, right = %d", pivot, left, right));
+
+
+        int i = left - 1;       // i = -1
+
+        for (int j = left; j < right; j++) {
+            if (arr[j] <= pivot) {
+                i++;
+
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+        i++;
+
+        System.out.println("Running: Before Swap " + java.util.Arrays.toString(arr));
+
+        int temp = arr[i];
+        arr[i] = arr[right];
+        arr[right] = temp;
+
+        System.out.println("Running: After Swap Swap " + java.util.Arrays.toString(arr));
+        System.out.println("Pivot Index: " + i);
+
+        return i;
+    }
+
 
     // sorts the array
     private static void mergeSort(int[] arr, int left, int right) {
