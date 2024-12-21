@@ -31,6 +31,10 @@ public class Recursion {
         int[] arr = {1,2,3,4,5};
         System.out.println(Arrays.toString(reverseArray(arr, 0)));
         printFibonacci(100, 0, 1);
+
+        for (int i = 0; i < 10; i++) {
+            System.out.println(printFibonacci(i) + " ");
+        }
     }
 
     public static void printFibonacci(int n, int a, int b) {
@@ -43,6 +47,13 @@ public class Recursion {
         }
         System.out.print(a + b + " ");
         printFibonacci(n, b, a + b);
+    }
+
+    public static int printFibonacci(int n) {
+        if (n <= 1) {
+            return n;
+        }
+        return printFibonacci(n - 1) + printFibonacci(n - 2);
     }
 
     public static int[] reverseArray(int[] arr, int idx) {
