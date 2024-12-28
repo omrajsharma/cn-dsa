@@ -7,12 +7,65 @@
  * - instance can't be created
  */
 
+/**
+ * Interfaces
+ * - are reference type in java
+ * - is a collection of abstract methods
+ * - writing is similar to that of class, classes contains
+ * attributes and behaviour of object and interface contains
+ * behaviour that a class implements
+ * - can't be instantiated
+ * - doesn't contain constructor
+ * - methods are abstract
+ * - cannot contain instance fields. It can only have it in static or final.
+ * - are not extended but implemented
+ * - can extend multiple interfaces
+ */
+
 public class Oops3 {
     public static void main(String[] args) {
         SquareConfig squareConfig = new SquareConfig(10);
         System.out.println(squareConfig.area());
         System.out.println(squareConfig.perimeter());
         squareConfig.printSides();
+    }
+}
+
+interface VehicleInterface {
+    public final static double MIN_SPEED = 100;
+
+    public double getMaxSpeed();
+
+    public double getEngineMaxHorsePower();
+
+    public int getSittingCapacity();
+}
+
+class MarutiSuzuki implements VehicleInterface {
+    public double getMaxSpeed() {
+        return 120;
+    }
+
+    public double getEngineMaxHorsePower() {
+        return 200;
+    }
+
+    public int getSittingCapacity() {
+        return 5;
+    }
+}
+
+class Ferrari implements VehicleInterface {
+    public double getMaxSpeed() {
+        return 330;
+    }
+
+    public double getEngineMaxHorsePower() {
+        return 900;
+    }
+
+    public int getSittingCapacity() {
+        return 2;
     }
 }
 
