@@ -1,123 +1,199 @@
-/**
- * Abstract classes
- * - is a blueprint of a class
- * - can have one or more abstract methods
- * - abstract methods only have the declaration not the implementation
- * - all the abstract methods need to be defined in the child class
- * - instance can't be created
- */
-
-/**
- * Interfaces
- * - are reference type in java
- * - is a collection of abstract methods
- * - writing is similar to that of class, classes contains
- * attributes and behaviour of object and interface contains
- * behaviour that a class implements
- * - can't be instantiated
- * - doesn't contain constructor
- * - methods are abstract
- * - cannot contain instance fields. It can only have it in static or final.
- * - are not extended but implemented
- * - can extend multiple interfaces
- */
-
 public class Oops3 {
     public static void main(String[] args) {
-        SquareConfig squareConfig = new SquareConfig(10);
-        System.out.println(squareConfig.area());
-        System.out.println(squareConfig.perimeter());
-        squareConfig.printSides();
+//        final double pi = 3.14;
+//        final double gst;
+////        System.out.println(gst);        // ERROR - can't access before initialisation
+//
+//        gst = 5;
+//        System.out.println(gst);
+//        System.out.println(pi);
+//        final Car civic = new Car(4, 5, 220);
+//        System.out.println(civic.tyres + " " + civic.seats + " " + civic.speed);
+////        civic.seats = 7;      // not possible due to final data member
+//        System.out.println(civic.tyres + " " + civic.seats + " " + civic.speed);
+////        civic = new Car(6, 7, 150);
+
+//        Car nexon = new Car(50, 4, 180, 5);
+//
+//        nexon.start();
+//        nexon.run();
+//        nexon.park();
+//        nexon.stop();
+
+        Car punch = new Car(100, 2000, 120);
+        punch.start();
+        punch.run();
+        punch.park();
+        punch.stop();
+        punch.display();
     }
 }
 
-interface VehicleInterface {
-    public final static double MIN_SPEED = 100;
+/**
+ * ABSTRACT CLASS
+ * class - blueprint of an object
+ * - are blueprint of a class
+ * - we can't instantiate an object of an abstract class
+ * - only have methods signature not the implementation
+ * - implementation of abstract methods are done in the extending class
+ * DIY
+ * - constructor in abstract class
+ * - build a non-abstract method in the class
+ * - build a function that is not present in the abstract class
+ * - make data members in the class apart from abstract
+ * - Can SUV access data members of abstract class or not - POC Aryan
+ */
 
-    public double getMaxSpeed();
+//abstract class Vehicle {
+//    int fuelCapacity;
+//    int tyreCount;
+//    int speed;
+//    int seatsCount;
+//
+//    abstract void start();      // abstract method
+//    abstract void stop();
+//    abstract void run();
+//    abstract void park();
+//}
+//
+//class Car extends Vehicle {
+//    Car(int fuelCapacity, int tyreCount, int speed, int seatsCount) {
+//        this.fuelCapacity = fuelCapacity;
+//        this.tyreCount = tyreCount;
+//        this.speed = speed;
+//        this.seatsCount = seatsCount;
+//    }
+//
+//    void start() {
+//        System.out.println("Car start");
+//    }
+//
+//    void stop() {
+//        System.out.println("Car stop");
+//    }
+//
+//    void run() {
+//        System.out.println("Car is running.");
+//    }
+//
+//    void park() {
+//        System.out.println("Car is parking.");
+//    }
+//}
 
-    public double getEngineMaxHorsePower();
 
-    public int getSittingCapacity();
+/**
+ * INTERFACE
+ * - are collection of abstract methods
+ * - We can't instantiate an object of an interface
+ * - Doesn't contain construct
+ * - All the methods in interface are abstract
+ * - are implemented not extended
+ * - class can implement multiple interfaces
+ */
+
+interface Testing {
+
 }
 
-class MarutiSuzuki implements VehicleInterface {
-    public double getMaxSpeed() {
-        return 120;
+interface Testing1 {
+
+}
+
+interface Vehicle {
+    public void run();
+    public void park();
+    public void stop();
+    public void start();
+}
+
+class Car implements Vehicle, Testing, Testing1 {
+    private int speed;
+    private int year;
+    private int horsePower;
+
+    Car(int speed, int year, int horsePower) {
+        this.speed = speed;
+        this.year = year;
+        this.horsePower = horsePower;
     }
 
-    public double getEngineMaxHorsePower() {
-        return 200;
+    public void run() {
+        System.out.println("Car is running.");
     }
 
-    public int getSittingCapacity() {
-        return 5;
+    public void park() {
+        System.out.println("Car is parked.");
+    }
+
+    public void stop() {
+        System.out.println("Car is stopped.");
+    }
+
+    public void start() {
+        System.out.println("Car is started.");
+    }
+
+    public void display() {
+        System.out.println("speed: " + speed + " year: " + year + " horsePower: " + horsePower);
     }
 }
 
-class Ferrari implements VehicleInterface {
-    public double getMaxSpeed() {
-        return 330;
-    }
 
-    public double getEngineMaxHorsePower() {
-        return 900;
-    }
 
-    public int getSittingCapacity() {
-        return 2;
-    }
-}
 
-abstract class ShapeConfig {
-    int side1;
-    int side2;
 
-    ShapeConfig(int side1, int side2) {
-        this.side1 = side1;
-        this.side2 = side2;
-    }
 
-    ShapeConfig(int side1) {
-        this.side1 = side1;
-    }
 
-    abstract int area();
 
-    abstract int perimeter();
 
-    void printSides() {
-        System.out.println(side1);
-        System.out.println(side2);
-    }
-}
 
-class SquareConfig extends ShapeConfig {
-    SquareConfig(int side1) {
-        super(side1);
-    }
 
-    int area() {
-        return side1*side1;
-    }
 
-    int perimeter() {
-        return 4 * side1;
-    }
 
-    // abstract void test();        // INVALID - concrete classes can only have concrete methods not abstract methods
-}
 
-class RectangleConfig extends ShapeConfig {
-    RectangleConfig(int side1, int side2) {
-        super(side1, side2);
-    }
 
-    int area() {
-        return side1*side2;
-    }
 
-    int perimeter() {
-        return side1*side2;
-    }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * In an object
+ * - function -> method, member function
+ * - variable -> data member, property
+ *
+ */
+
+/**
+ * FINAL KEYWORD
+ * - final primitive variables values can't be altered
+ * - final non-primitive (obj) variables reference can't be altered on 23 line
+ * - final non-primitive (obj) variables data members can be altered if they are not final data members.
+ * Assignment for students
+ * - final methods (funtions) can't be over ride
+ * - final class can't be inherited
+ * ! can we change it using getter and setter - Diptanu will tell in next year on first class
+ */
+
+//// FINAL KEYWORD
+//class Car {
+//    final int tyres;
+//    final int seats;
+//    final int speed;
+//
+//    Car (int tyres, int seats, int speed) {
+//        this.tyres = tyres;
+//        this.seats = seats;
+//        this.speed = speed;
+//    }
+//}
