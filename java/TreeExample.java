@@ -38,87 +38,76 @@ public class TreeExample {
             return root;
         }
 
-        // In-order traversal: Left -> Root -> Right
-        public void inOrder(Node node) {
+        public void inorder(Node node) {
             if (node != null) {
-                inOrder(node.left);
+                inorder(node.left);
                 System.out.print(node.data + " ");
-                inOrder(node.right);
+                inorder(node.right);
             }
         }
 
-        // Pre-order traversal: Root -> Left -> Right
-        public void preOrder(Node node) {
+        public void preorder(Node node) {
             if (node != null) {
                 System.out.print(node.data + " ");
-                preOrder(node.left);
-                preOrder(node.right);
+                preorder(node.left);
+                preorder(node.right);
             }
         }
 
-        // Post-order traversal: Left -> Right -> Root
-        public void postOrder(Node node) {
+        public void postorder(Node node) {
             if (node != null) {
-                postOrder(node.left);
-                postOrder(node.right);
+                postorder(node.left);
+                postorder(node.right);
                 System.out.print(node.data + " ");
             }
         }
 
-        // Level-order traversal: Level by level
-        public void levelOrder(Node root) {
-            if (root == null) {
+        public void mirrorTree(Node node) {
+            if (node != null) {
+                Node temp = node.left;
+                node.left = node.right;
+                node.right = temp;
+
+                mirrorTree(node.left);
+                mirrorTree(node.right);
+            }
+        }
+
+        // height of the tree
+        public int calculateHeight(Node node) {
+            if (node == null) {
+                return -1;
+            }
+            int leftHeight = calculateHeight(node.left);
+            int rightHeight = calculateHeight(node.right);
+
+            return Math.max(leftHeight, rightHeight) + 1;
+        }
+
+        public void levelOrder(Node node) {
+            if (node == null) {
                 return;
             }
 
             Queue<Node> queue = new LinkedList<>();
-            queue.add(root); // Start with the root
+            queue.add(node);
 
             while (!queue.isEmpty()) {
-                Node current = queue.poll(); // Dequeue the current node
-                System.out.print(current.data + " "); // Process the current node
+                Node current = queue.poll();
 
-                // Enqueue left child if it exists
+                System.out.print(current.data + " ");
+
                 if (current.left != null) {
                     queue.add(current.left);
                 }
 
-                // Enqueue right child if it exists
                 if (current.right != null) {
                     queue.add(current.right);
                 }
             }
         }
 
-        // Method to calculate the height of the tree
-        public int calculateHeight(Node node) {
-            if (node == null) {
-                return -1; // Base case: height of an empty tree is -1
-            }
-
-            // Recursively calculate height of left and right subtrees
-            int leftHeight = calculateHeight(node.left);
-            int rightHeight = calculateHeight(node.right);
-
-            // Return the maximum of left and right heights plus 1 (for the current node)
-            return Math.max(leftHeight, rightHeight) + 1;
-        }
-
-        // Method to mirror the tree
-        public void mirrorTree(Node node) {
-            if (node == null) {
-                return;
-            }
-
-            // Swap the left and right children
-            Node temp = node.left;
-            node.left = node.right;
-            node.right = temp;
-
-            // Recursively mirror the left and right subtrees
-            mirrorTree(node.left);
-            mirrorTree(node.right);
-        }
+        // diameter of the tree
     }
 
     public static void main(String[] args) {
@@ -132,6 +121,7 @@ public class TreeExample {
          *      2     6
          *     / \   / \
          *    1   3 5   7
+         *
          */
 
         tree.insert(4);
@@ -142,38 +132,14 @@ public class TreeExample {
         tree.insert(5);
         tree.insert(7);
 
-        // Perform and print tree traversals
-        System.out.print("In-order Traversal: ");
-        tree.inOrder(tree.root); // Should output: 1 2 3 4 5 6 7
+        // inorder traversal - 1 2 3 4 5 6 7
+        System.out.println("Inorder Traversal Example");
+        tree.inorder(tree.root);
         System.out.println();
 
-        System.out.print("Pre-order Traversal: ");
-        tree.preOrder(tree.root); // Should output: 4 2 1 3 6 5 7
-        System.out.println();
-
-        System.out.print("Post-order Traversal: ");
-        tree.postOrder(tree.root); // Should output: 1 3 2 5 7 6 4
-        System.out.println();
-
-        // Perform and print level-order traversal
-        System.out.print("Level-order Traversal: ");
-        tree.levelOrder(tree.root); // Should output: 4 2 6 1 3 5 7
-
-        // Calculate and print the height of the tree
-        int height = tree.calculateHeight(tree.root);
-        System.out.println("Height of the tree: " + height); // Should output: 2
-
-        // Original tree in-order traversal
-        System.out.print("In-order before mirroring: ");
-        tree.inOrder(tree.root);
-        System.out.println();
-
-        // Mirror the tree
-        tree.mirrorTree(tree.root);
-
-        // Mirrored tree in-order traversal
-        System.out.print("In-order after mirroring: ");
-        tree.inOrder(tree.root);
+        // preorder traversal - 4 1 2 3 5 6 7
+        System.out.println("Preorder Traversal Example");
+        tree.preorder(tree.root);
         System.out.println();
     }
 }
